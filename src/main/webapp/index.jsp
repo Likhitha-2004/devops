@@ -1,103 +1,53 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page session="false" %>
-<%
-    // Initialize the To-Do list in the application scope if it doesn't exist
-    List<String> todoList = (List<String>) application.getAttribute("todoList");
-    if (todoList == null) {
-        todoList = new ArrayList<>();
-        application.setAttribute("todoList", todoList);
-    }
-
-    // Handle form submission
-    String task = request.getParameter("task");
-    String removeIndex = request.getParameter("remove");
-    if (task != null && !task.trim().isEmpty()) {
-        todoList.add(task);
-    }
-    if (removeIndex != null) {
-        int index = Integer.parseInt(removeIndex);
-        if (index >= 0 && index < todoList.size()) {
-            todoList.remove(index);
-        }
-    }
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Order Summary</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 300px;
-        }
-        input[type="submit"] {
-            padding: 10px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #4cae4c;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            padding: 10px;
-            background-color: #fff;
-            margin: 5px 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .remove-button {
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            padding: 5px 10px;
-        }
-        .remove-button:hover {
-            background-color: #c9302c;
-        }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 300px; width: 100%; }
+        h1 { color: #333; }
+        p { font-size: 16px; color: #555; }
     </style>
 </head>
 <body>
-    <h1>My To-Do List</h1>
-    <form action="index.jsp" method="post">
-        <input type="text" name="task" placeholder="Add a new task..." required>
-        <input type="submit" value="Add Task">
-    </form>
+    <div class="container">
+        <h1>Order Summary</h1>
+        <%
+            // Retrieve form data
+            String flavor = request.getParameter("flavor");
+            String quantityStr = request.getParameter("quantity");
 
-    <ul>
-        <% for (int i = 0; i < todoList.size(); i++) { %>
-            <li>
-                <span><%= todoList.get(i) %></span>
-                <form action="index.jsp" method="post" style="display:inline;">
-                    <input type="hidden" name="remove" value="<%= i %>">
-                    <input type="submit" class="remove-button" value="Remove">
-                </form>
-            </li>
-        <% } %>
-    </ul>
+            int quantity = Integer.parseInt(quantityStr);
+
+            // Define prices for each flavor
+            double pricePerScoop;
+            switch (flavor) {
+                case "Vanilla":
+                    pricePerScoop = 2.50;
+                    break;
+                case "Chocolate":
+                    pricePerScoop = 3.00;
+                    break;
+                case "Strawberry":
+                    pricePerScoop = 3.50;
+                    break;
+                default:
+                    pricePerScoop = 0.0;
+            }
+
+            // Calculate total cost
+            double totalCost = pricePerScoop * quantity;
+
+            // Display the order summary
+        %>
+        <p><strong>Flavor:</strong> <%= flavor %></p>
+        <p><strong>Quantity:</strong> <%= quantity %> scoop(s)</p>
+        <p><strong>Total Price:</strong> $<%= String.format("%.2f", totalCost) %></p>
+
+        <form action="index.jsp" method="get">
+            <button type="submit">Place New Order</button>
+        </form>
+    </div>
 </body>
 </html>
