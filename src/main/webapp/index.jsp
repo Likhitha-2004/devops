@@ -2,58 +2,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Order Summary</title>
+    <title>Ice Cream Order App</title>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .container { text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 300px; width: 100%; }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px; width: 100%; }
         h1 { color: #333; }
-        p { font-size: 16px; color: #555; }
+        .flavor-details { text-align: left; margin: 20px 0; }
+        .flavor-details p { margin: 5px 0; }
+        input[type="text"], button { padding: 8px; width: 100%; margin-top: 10px; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Order Summary</h1>
-        <%
-            // Retrieve form data
-            String flavor = request.getParameter("flavor");
-            String quantityStr = request.getParameter("quantity");
-            
-            // Check if quantity is not null or empty
-            if (quantityStr == null || quantityStr.isEmpty()) {
-                out.println("<p>Error: Quantity is required.</p>");
-                out.println("<a href='index.jsp'>Go back to order page</a>");
-                return;
-            }
+        <h1>Ice Cream Order App</h1>
 
-            int quantity = Integer.parseInt(quantityStr);
+        <div class="flavor-details">
+            <h2>Available Flavors</h2>
+            <p><strong>Vanilla</strong>: Classic vanilla flavor. Price: $2.50 per scoop</p>
+            <p><strong>Chocolate</strong>: Rich chocolate flavor. Price: $3.00 per scoop</p>
+            <p><strong>Strawberry</strong>: Fresh strawberry flavor. Price: $3.50 per scoop</p>
+        </div>
 
-            // Define prices for each flavor
-            double pricePerScoop;
-            switch (flavor) {
-                case "Vanilla":
-                    pricePerScoop = 2.50;
-                    break;
-                case "Chocolate":
-                    pricePerScoop = 3.00;
-                    break;
-                case "Strawberry":
-                    pricePerScoop = 3.50;
-                    break;
-                default:
-                    pricePerScoop = 0.0;
-            }
-
-            // Calculate total cost
-            double totalCost = pricePerScoop * quantity;
-
-            // Display the order summary
-        %>
-        <p><strong>Flavor:</strong> <%= flavor %></p>
-        <p><strong>Quantity:</strong> <%= quantity %> scoop(s)</p>
-        <p><strong>Total Price:</strong> $<%= String.format("%.2f", totalCost) %></p>
-
-        <form action="index.jsp" method="get">
-            <button type="submit">Place New Order</button>
+        <form action="search.jsp" method="get">
+            <label for="search">Search for a Flavor:</label>
+            <input type="text" id="search" name="flavorName" placeholder="Enter flavor name" required>
+            <button type="submit">Search</button>
         </form>
     </div>
 </body>
