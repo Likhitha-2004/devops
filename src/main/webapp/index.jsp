@@ -17,6 +17,13 @@
             // Retrieve form data
             String flavor = request.getParameter("flavor");
             String quantityStr = request.getParameter("quantity");
+            
+            // Check if quantity is not null or empty
+            if (quantityStr == null || quantityStr.isEmpty()) {
+                out.println("<p>Error: Quantity is required.</p>");
+                out.println("<a href='index.jsp'>Go back to order page</a>");
+                return;
+            }
 
             int quantity = Integer.parseInt(quantityStr);
 
