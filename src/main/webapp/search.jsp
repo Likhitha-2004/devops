@@ -4,13 +4,57 @@
 <head>
     <title>Search Results</title>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 300px; width: 100%; }
-        h1 { color: #333; }
-        .flavor-info { margin-top: 20px; font-size: 16px; color: #555; }
-        .flavor-info p { margin: 10px 0; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        /* Updated styles for body */
+        body { 
+            font-family: 'Roboto', sans-serif; /* Updated font style */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #eef2f3; /* Light blue-gray background */
+        }
+
+        /* Updated styles for container */
+        .container { 
+            text-align: center; 
+            border: 1px solid #ccc; 
+            padding: 20px; 
+            border-radius: 8px; 
+            max-width: 300px; 
+            width: 100%; 
+            background-color: #ffffff; /* White container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Styling for the heading */
+        h1 { 
+            color: #333; 
+            font-family: 'Open Sans', sans-serif; /* Updated heading font */
+            font-weight: bold; 
+        }
+
+        /* Flavor info styling */
+        .flavor-info { 
+            margin-top: 20px; 
+            font-size: 16px; 
+            color: #555; 
+        }
+
+        .flavor-info p { 
+            margin: 10px 0; 
+        }
+
+        /* Link styling */
+        a { 
+            color: #007bff; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+
+        a:hover { 
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
