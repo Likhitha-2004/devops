@@ -2,38 +2,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Search Results</title>
+    <title>Ice Cream Order App</title>
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 400px; width: 100%; }
-        h1 { color: #333; }
-        p { margin: 10px 0; }
-        a { text-decoration: none; color: #007bff; }
-        a:hover { text-decoration: underline; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+            background-color: #ffffff; /* White card-like container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        h1 {
+            color: #333;
+        }
+        .flavor-details {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .flavor-details p {
+            margin: 5px 0;
+        }
+        input[type="text"], button {
+            padding: 8px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Search Results</h1>
-        <%
-            // Define available flavors with their prices
-            Map<String, String> flavors = new HashMap<>();
-            flavors.put("Vanilla", "Classic vanilla flavor. Price: $2.50 per scoop");
-            flavors.put("Chocolate", "Rich chocolate flavor. Price: $3.00 per scoop");
-            flavors.put("Strawberry", "Fresh strawberry flavor. Price: $3.50 per scoop");
+        <h1>Ice Cream Order App</h1>
 
-            // Get the search term from the query parameter
-            String flavorName = request.getParameter("flavorName");
-            String flavorDetails = flavors.get(flavorName);
+        <div class="flavor-details">
+            <h2>Available Flavors</h2>
+            <p><strong>Vanilla</strong>: Classic vanilla flavor. Price: $2.50 per scoop</p>
+            <p><strong>Chocolate</strong>: Rich chocolate flavor. Price: $3.00 per scoop</p>
+            <p><strong>Strawberry</strong>: Fresh strawberry flavor. Price: $3.50 per scoop</p>
+        </div>
 
-            // Check if the flavor exists and display the result
-            if (flavorDetails != null) {
-        %>
-            <p><strong><%= flavorName %>:</strong> <%= flavorDetails %></p>
-        <% } else { %>
-            <p>Sorry, the flavor "<%= flavorName %>" is not available.</p>
-        <% } %>
-        <a href="index.jsp">Back to Home</a>
+        <form action="search.jsp" method="get">
+            <label for="search">Search for a Flavor:</label>
+            <input type="text" id="search" name="flavorName" placeholder="Enter flavor name" required>
+            <button type="submit">Search</button>
+        </form>
     </div>
 </body>
 </html>
